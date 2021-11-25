@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <link rel="icon" type="image/png" href="images/cubicle .png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Libraries</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-0">
+        <div class="container-fluid">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="images/cubicle .png" width="50" height="44" />
+                </a>
+                <a class="navbar-brand" href="index.html">Home</a>
+                <a class="navbar-brand" href="messages.html">Messages</a>
+                <a class="navbar-brand" href="libraries.html">Libraries</a>
+                <a class="navbar-brand" href="categories.html">Categories</a>
+                <a class="navbar-brand" href="reservations.html">Reservations</a>
+                <a class="navbar-brand" href="clients.html">Clients</a>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                        Cubicle Rental
+                    </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active text-dark" aria-current="page" href="create-clients.html">Sign up</a> </li>
+              <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="#">Sign in</a></li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle text-dark"
+                  href="#"
+                  id="offcanvasNavbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Account
+                </a>
+                    <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                    <li> <a class="dropdown-item" href="#">profile</a></li>
+                    <li><a class="dropdown-item" href="#">settings</a></li>
+                    <li>
+                    <hr class="dropdown-divider" />
+                    </li>
+                    <li> <a class="dropdown-item" href="#">logout</a></li>
+                     </ul>
+                    </li>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="images/CD-feature.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">
+                    Responsive left-aligned hero with image
+                </h1>
+                <p class="lead">
+                    Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5 ">
+        <div class="row ">
+            <div class="col-10">
+                <button type="button" onclick="visibility();" id="btn-view-lib" class="btn btn-info">
+            <span class="material-icons" id="show-icon">
+              visibility_off
+              </span>
+          </button>
+            </div>
+            <div class="col-2">
+                <button type="button" id="btn-save" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalCrud">
+            <span class="material-icons">
+              library_add
+              </span>
+          </button>
+
+            </div>
+        </div>
+    </div>
+      <div class="container mt-2" id="lib-table"  >
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <table id="clients-table" class="table table-bordered" style="width:100%;">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Target</th>
+                            <th>Capacity</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!--save-modal-->
+    <div class="modal fade" id="save-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Library</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="cubible-form">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="target" class="col-form-label">Target:</label>
+                                <input type="text" id="target" class="form-control" placeholder="Target" aria-label="Target">
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input type="text" id="name" class="form-control" placeholder="Name" aria-label="Name">
+                            </div>
+                           
+                            <div class="col-12">
+                                    <label for="id" class="col-form-label">Description:</label>
+                                    <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a description here" id="description"></textarea>
+                                        <label for="floatingTextarea2">Description</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                    <label for="capacity" class="col-form-label">Capacity:</label>
+                                    <input type="text" id="capacity" class="form-control" placeholder="#" aria-label="Capacity">
+                                </div>
+                                <div class="col" >
+                                    <label for="category" class="col-form-label">Category:</label>
+                                    <div id="category-id-save"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="save" class="btn btn-info" onclick="saveInfo();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete-modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleDelete">Are you sure ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    The element selected is going to be removed.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="btn-confirm" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--detail-modal-->
+    <div class="modal fade" id="detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title-detail" id="titleModalDetail">Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <label for="target" class="col-form-label">Target :</label>
+                                <b class="modal-title-detail" id="target-detail"></b>
+                            </div>
+                            <div class="col">
+                                <label for="capacity" class="col-form-label">Capacity :</label>
+                                <b class="modal-title-detail" id="capacity-detail"></b>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="name" class="col-form-label">Name :</label>
+                                    <b class="modal-title-detail" id="name-detail"></b>
+                                </div>
+                                <div class="col">
+                                    <label for="capacity" class="col-form-label">Category :</label>
+                                    <b class="modal-title-detail" id="category-detail"></b>
+                                </div>
+                                </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="category" class="col-form-label">Description :</label>
+                                    <b class="modal-title-detail" id="description-detail"></b>
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <!-- Subscribe me on Youtube https://bit.ly/3m9avif-->
+    <footer id="footer" class="footer-1 mt-5">
+        <div class="main-footer widgets-dark typo-light">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="widget subscribe no-box">
+                            <h5 class="widget-title">COMPANY NAME<span></span></h5>
+                            <p>About the company, little discription will goes here.. </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="widget no-box">
+                            <h5 class="widget-title">Quick Links<span></span></h5>
+                            <ul class="thumbnail-widget">
+                                <li>
+                                    <div class="thumb-content"><a class="link-info" href="#">Get Started</a></div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="widget no-box">
+                            <h5 class="widget-title">Get Started<span></span></h5>
+                            <p>Get access to your full Training and Marketing Suite.</p>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+
+                        <div class="widget no-box">
+                            <h5 class="widget-title">Contact Us<span></span></h5>
+                            <p>info@domain.com</p>                                                 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Copyright Company Name © 2021. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="js/libraries.js"></script>
+
+
+</body>
+
+</html>
