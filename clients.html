@@ -30,6 +30,8 @@
                 <a class="navbar-brand" href="categories.html">Categories</a>
                 <a class="navbar-brand" href="reservations.html">Reservations</a>
                 <a class="navbar-brand" href="clients.html">Clients</a>
+                <a class="navbar-brand" href="admins.html ">Admins</a>
+
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -46,28 +48,21 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link active text-dark" aria-current="page" href="create-clients.html">Sign up</a> </li>
-              <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="#">Sign in</a></li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle text-dark"
-                  href="#"
-                  id="offcanvasNavbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                        <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="#">Sign in</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
-                    <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                    <li> <a class="dropdown-item" href="#">profile</a></li>
-                    <li><a class="dropdown-item" href="#">settings</a></li>
-                    <li>
-                    <hr class="dropdown-divider" />
-                    </li>
-                    <li> <a class="dropdown-item" href="#">logout</a></li>
-                     </ul>
-                    </li>
-                    
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li> <a class="dropdown-item" href="#">profile</a></li>
+                                <li><a class="dropdown-item" href="#">settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li> <a class="dropdown-item" href="#">logout</a></li>
+                            </ul>
+                        </li>
+
                 </div>
             </div>
         </div>
@@ -83,32 +78,32 @@
                     Sign up
                 </h4>
                 <form>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" id="name-client"  >
+                    <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name-client">
+                        </div>
                     </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Age</label>
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control" id="age-client">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Age</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="age-client">
+                        </div>
                     </div>
-                  </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="text" readonly class="form-control-plaintext" id="email-client" value="email@example.com">
+                            <input type="text" class="form-control" id="email-client">
                         </div>
-                      </div>
-                      <div class="mb-3 row">
+                    </div>
+                    <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="password-client">
+                            <input type="password" class="form-control" id="password-client">
                         </div>
-                      </div>    
-                      <button type="button" class="btn btn-info mt-4" onclick="save()">Register</button>
-                      </form>          
+                    </div>
+                    <button type="button" class="btn btn-info mt-4" onclick="saveInfo()">Register</button>
+                </form>
             </div>
             <div id="liveAlertPlaceholder"></div>
         </div>
@@ -124,20 +119,18 @@
               </span>
           </button>
             </div>
-            
+
         </div>
     </div>
-      <div class="container mt-2" id="lib-table"  >
+    <div class="container mt-2" id="client-table">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <table id="clients-table" class="table table-bordered" style="width:100%;">
                     <thead class="table-dark">
                         <tr>
-                            <th>Target</th>
-                            <th>Capacity</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Category</th>
+                            <th>Email</th>
+                            <th>Age</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -156,41 +149,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Library</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Client</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="cubible-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label for="target" class="col-form-label">Target:</label>
-                                <input type="text" id="target" class="form-control" placeholder="Target" aria-label="Target">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" id="name" class="form-control" placeholder="Name" aria-label="Name">
-                            </div>
-                           
-                            <div class="col-12">
-                                    <label for="id" class="col-form-label">Description:</label>
-                                    <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a description here" id="description"></textarea>
-                                        <label for="floatingTextarea2">Description</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                <div class="col">
-                                    <label for="capacity" class="col-form-label">Capacity:</label>
-                                    <input type="text" id="capacity" class="form-control" placeholder="#" aria-label="Capacity">
-                                </div>
-                                <div class="col" >
-                                    <label for="category" class="col-form-label">Category:</label>
-                                    <div id="category-id-lib"></div>
-                                    
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="target" class="col-form-label">Name:</label>
+                            <input type="text" id="name-client-update" class="form-control" placeholder="Name" aria-label="Target">
                         </div>
-                    </form>
+                        <div class="col-lg-12">
+                            <label for="name" class="col-form-label">Email:</label>
+                            <input type="text" id="email-client-update" class="form-control" placeholder="Email" aria-label="Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="capacity" class="col-form-label">Age:</label>
+                            <input type="text" id="age-client-update" class="form-control" placeholder="#" aria-label="Capacity">
+                        </div>
+                        <div class="col-8">
+                            <label for="category" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password-client">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -201,11 +183,11 @@
     </div>
 
     <!-- delete-modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleDelete">Are you sure ?</h5>
+                    <h5 class="modal-title" id="modal-delete-title">Are you sure ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -223,40 +205,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title-detail" id="titleModalDetail">Detail</h5>
+                    <h5 class="modal-title-detail" id="titleModalDetail"> Client Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <label for="target" class="col-form-label">Target :</label>
-                                <b class="modal-title-detail" id="target-detail"></b>
+                                <label for="target" class="col-form-label">Name :</label>
+                                <b class="modal-title-detail" id="name-client-detail"></b>
                             </div>
                             <div class="col">
-                                <label for="capacity" class="col-form-label">Capacity :</label>
-                                <b class="modal-title-detail" id="capacity-detail"></b>
+                                <label for="capacity" class="col-form-label">Email :</label>
+                                <b class="modal-title-detail" id="email-client-detail"></b>
                             </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="name" class="col-form-label">Name :</label>
-                                    <b class="modal-title-detail" id="name-detail"></b>
-                                </div>
-                                <div class="col">
-                                    <label for="capacity" class="col-form-label">Category :</label>
-                                    <b class="modal-title-detail" id="category-detail"></b>
-                                </div>
-                                </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="category" class="col-form-label">Description :</label>
-                                    <b class="modal-title-detail" id="description-detail"></b>
-                                </div>                              
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name" class="col-form-label">Age :</label>
+                                <b class="modal-title-detail" id="age-client-detail"></b>
                             </div>
                         </div>
                     </div>
-                
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -264,7 +236,6 @@
         </div>
     </div>
     <!--footer-->
-    <!-- Subscribe me on Youtube https://bit.ly/3m9avif-->
     <footer id="footer" class="footer-1 mt-5">
         <div class="main-footer widgets-dark typo-light">
             <div class="container">
@@ -284,7 +255,7 @@
                                 <li>
                                     <div class="thumb-content"><a class="link-info" href="#">Get Started</a></div>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -293,7 +264,7 @@
                         <div class="widget no-box">
                             <h5 class="widget-title">Get Started<span></span></h5>
                             <p>Get access to your full Training and Marketing Suite.</p>
-                            
+
                         </div>
                     </div>
 
@@ -301,7 +272,7 @@
 
                         <div class="widget no-box">
                             <h5 class="widget-title">Contact Us<span></span></h5>
-                            <p>info@domain.com</p>                                                 
+                            <p>info@domain.com</p>
                         </div>
                     </div>
 
@@ -320,9 +291,9 @@
         </div>
     </footer>
 
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   <script type="text/javascript" src="js/clients.js"></script>
+    <script type="text/javascript" src="js/clients.js"></script>
 
 
 </body>

@@ -30,6 +30,8 @@
                 <a class="navbar-brand" href="categories.html">Categories</a>
                 <a class="navbar-brand" href="reservations.html">Reservations</a>
                 <a class="navbar-brand" href="clients.html">Clients</a>
+                <a class="navbar-brand" href="admins.html ">Admins</a>
+
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -46,28 +48,21 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link active text-dark" aria-current="page" href="create-clients.html">Sign up</a> </li>
-              <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="#">Sign in</a></li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle text-dark"
-                  href="#"
-                  id="offcanvasNavbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                        <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" href="#">Sign in</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
-                    <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                    <li> <a class="dropdown-item" href="#">profile</a></li>
-                    <li><a class="dropdown-item" href="#">settings</a></li>
-                    <li>
-                    <hr class="dropdown-divider" />
-                    </li>
-                    <li> <a class="dropdown-item" href="#">logout</a></li>
-                     </ul>
-                    </li>
-                    
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li> <a class="dropdown-item" href="#">profile</a></li>
+                                <li><a class="dropdown-item" href="#">settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li> <a class="dropdown-item" href="#">logout</a></li>
+                            </ul>
+                        </li>
+
                 </div>
             </div>
         </div>
@@ -78,15 +73,36 @@
             <div class="col-10 col-sm-8 col-lg-6">
                 <img src="images/CD-feature.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
             </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3">
-                    Responsive left-aligned hero with image
-                </h1>
-                <p class="lead">
-                    Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
-                </p>
+            <div class="col-lg-6 ">
+                <h4 class="display-5 fw-bold lh-1 mb-5">
+                    Make your reservation
+                </h4>
+                <form>
+                    <div class="mb-3 row">
+                        <div class="col-sm-8">
+                            <div id="client-id-reservation"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-8">
+                            <div id="lib-id-reservation"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-5">
+                            <label class="col-sm-2 col-form-label">Start Date</label>
+                            <input type="date" id="start-date" name="start-date" value="2021-11-25">
 
+                        </div>
+                        <div class="col-sm-7">
+                            <label class="col-sm-2 col-form-label">Devolution Date</label>
+                            <input type="date" id="devolution-date" name="devolution-date" value="2021-11-25">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-info mt-4" onclick="saveInfo()">Reserve</button>
+                </form>
             </div>
+            <div id="liveAlertPlaceholder"></div>
         </div>
     </div>
 
@@ -100,26 +116,19 @@
               </span>
           </button>
             </div>
-            <div class="col-2">
-                <button type="button" id="btn-save" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalCrud">
-            <span class="material-icons">
-              library_add
-              </span>
-          </button>
 
-            </div>
         </div>
     </div>
-      <div class="container mt-2" id="lib-table"  >
+    <div class="container mt-2" id="reservation-table">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <table id="clients-table" class="table table-bordered" style="width:100%;">
                     <thead class="table-dark">
                         <tr>
-                            <th>Target</th>
-                            <th>Capacity</th>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>Devolution Date</th>
+                            <th>Client</th>
+                            <th>Library</th>
                             <th>Category</th>
                             <th>Options</th>
                         </tr>
@@ -139,42 +148,33 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Library</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Reservation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="cubible-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label for="target" class="col-form-label">Target:</label>
-                                <input type="text" id="target" class="form-control" placeholder="Target" aria-label="Target">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" id="name" class="form-control" placeholder="Name" aria-label="Name">
-                            </div>
-                           
-                            <div class="col-12">
-                                    <label for="id" class="col-form-label">Description:</label>
-                                    <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a description here" id="description"></textarea>
-                                        <label for="floatingTextarea2">Description</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                <div class="col">
-                                    <label for="capacity" class="col-form-label">Capacity:</label>
-                                    <input type="text" id="capacity" class="form-control" placeholder="#" aria-label="Capacity">
-                                </div>
-                                <div class="col" >
-                                    <label for="category" class="col-form-label">Category:</label>
-                                    <div id="category-id-lib"></div>
-                                    
-                                </div>
-                            </div>
+                    <div class="row mb-2">
+                        <div class="col-lg-8">
+                            <div id="client-id-reservation-update"></div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-8">
+                            <div id="lib-id-reservation-update"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-5">
+                            <label class="col-sm-2 col-form-label">Start Date</label>
+                            <input type="date" id="start-date-update" name="start-date" value="2021-11-25">
+
+                        </div>
+                        <div class="col-sm-7">
+                            <label class="col-sm-2 col-form-label">Devolution Date</label>
+                            <input type="date" id="devolution-date-update" name="devolution-date" value="2021-11-25">
+                        </div>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="save" class="btn btn-primary" onclick="saveInfo();">Save</button>
@@ -183,12 +183,48 @@
         </div>
     </div>
 
-    <!-- delete-modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+    <div class="modal fade" id="save-score-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleDelete">Are you sure ?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Rate the reservation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="name" class="col-form-label">Score:</label>
+                            <input type="text" id="score" class="form-control" placeholder="Score">
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-12">
+                            <textarea class="form-control" style="height: 100px" placeholder="Leave a message here" id="message-score"></textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="save-score" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- delete-modal -->
+    <div class="modal fade" id="delete-message-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-delete-title">Are you sure ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -206,40 +242,44 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title-detail" id="titleModalDetail">Detail</h5>
+                    <h5 class="modal-title-detail" id="titleModalDetail"> Reservation Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <label for="target" class="col-form-label">Target :</label>
-                                <b class="modal-title-detail" id="target-detail"></b>
+                                <label for="target" class="col-form-label">Start Date :</label>
+                                <b class="modal-title-detail" id="start-date-detail"></b>
+                            </div>
+                            <div class="col">
+                                <label for="capacity" class="col-form-label">Devolution Date :</label>
+                                <b class="modal-title-detail" id="devolution-date-detail"></b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="target" class="col-form-label">Client :</label>
+                                <b class="modal-title-detail" id="client-detail"></b>
+                            </div>
+                            <div class="col">
+                                <label for="capacity" class="col-form-label">Library :</label>
+                                <b class="modal-title-detail" id="lib-detail"></b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="target" class="col-form-label">Category :</label>
+                                <b class="modal-title-detail" id="category-detail"></b>
                             </div>
                             <div class="col">
                                 <label for="capacity" class="col-form-label">Capacity :</label>
                                 <b class="modal-title-detail" id="capacity-detail"></b>
                             </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="name" class="col-form-label">Name :</label>
-                                    <b class="modal-title-detail" id="name-detail"></b>
-                                </div>
-                                <div class="col">
-                                    <label for="capacity" class="col-form-label">Category :</label>
-                                    <b class="modal-title-detail" id="category-detail"></b>
-                                </div>
-                                </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="category" class="col-form-label">Description :</label>
-                                    <b class="modal-title-detail" id="description-detail"></b>
-                                </div>                              
-                            </div>
                         </div>
                     </div>
-                
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -247,7 +287,6 @@
         </div>
     </div>
     <!--footer-->
-    <!-- Subscribe me on Youtube https://bit.ly/3m9avif-->
     <footer id="footer" class="footer-1 mt-5">
         <div class="main-footer widgets-dark typo-light">
             <div class="container">
@@ -267,7 +306,7 @@
                                 <li>
                                     <div class="thumb-content"><a class="link-info" href="#">Get Started</a></div>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -276,7 +315,7 @@
                         <div class="widget no-box">
                             <h5 class="widget-title">Get Started<span></span></h5>
                             <p>Get access to your full Training and Marketing Suite.</p>
-                            
+
                         </div>
                     </div>
 
@@ -284,7 +323,7 @@
 
                         <div class="widget no-box">
                             <h5 class="widget-title">Contact Us<span></span></h5>
-                            <p>info@domain.com</p>                                                 
+                            <p>info@domain.com</p>
                         </div>
                     </div>
 
@@ -303,9 +342,9 @@
         </div>
     </footer>
 
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   <script type="text/javascript" src="js/libraries.js"></script>
+    <script type="text/javascript" src="js/reservations.js"></script>
 
 
 </body>
